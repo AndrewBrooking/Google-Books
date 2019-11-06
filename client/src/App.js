@@ -1,19 +1,30 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import AppNav from "./components/AppNav";
+import Home from "./pages/Home";
+import Saved from "./pages/Saved";
+
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from "react-router-dom";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "shards-ui/dist/css/shards.min.css"
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <Router>
+        <div className="container-fluid">
+          <AppNav />
+
+        <Switch>
+          <Route exact path="/api/books" component={Saved} />
+          <Route component={Home} />
+        </Switch>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      </Router>
     );
   }
 }
