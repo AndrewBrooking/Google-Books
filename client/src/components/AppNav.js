@@ -1,11 +1,16 @@
 import React from "react";
-
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     Navbar,
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink
+    NavLink,
+    InputGroup,
+    InputGroupAddon,
+    InputGroupText,
+    FormInput
 } from "shards-react";
 
 function AppNav() {
@@ -21,6 +26,17 @@ function AppNav() {
                         Saved
                     </NavLink>
                 </NavItem>
+            </Nav>
+
+            <Nav navbar className="ml-auto w-50">
+                <InputGroup size="md" seamless>
+                    <InputGroupAddon type="append">
+                        <InputGroupText>
+                            <FontAwesomeIcon icon={faSearch} />
+                        </InputGroupText>
+                    </InputGroupAddon>
+                    <FormInput className="border-0 pl-2" placeholder="Search..." />
+                </InputGroup>
             </Nav>
         </Navbar>
     );

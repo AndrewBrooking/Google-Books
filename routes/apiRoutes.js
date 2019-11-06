@@ -1,4 +1,17 @@
+const axios = require("axios");
+const API_KEY = "AIzaSyBxiBZEwQSlfF9cbWayfIEyi3WvqLOSzCo";
+
 module.exports = (app, db) => {
+
+    app.get("/search", (req, res) => {
+        let uri = "https://www.googleapis.com/books/v1/volumes?q=" +
+            req.body.term + "&key=" + API_KEY;
+
+        axios
+            .get(uri)
+            .then(({ data: { results } }) => res.json(results))
+            .catch(err => res.status(422).json(err));
+    });
 
     // Returns all saved books in JSON format
     app.get("api/books", (req, res) => {
