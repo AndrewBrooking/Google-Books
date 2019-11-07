@@ -11,6 +11,9 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/googlebooks";
 
+// Import API routes
+require("./routes/apiRoutes")(app, db);
+
 // Connect to MongoDB
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
@@ -21,9 +24,6 @@ mongoose.connect(MONGODB_URI, {
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-
-// Import API routes
-require("./routes/apiRoutes")(app, db);
 
 // Send every request to the React app
 app.get("*", function(req, res) {

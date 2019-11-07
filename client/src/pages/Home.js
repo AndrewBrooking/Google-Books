@@ -13,10 +13,13 @@ function Home(props) {
             <CardHeader>
                 <h4>Search Results</h4>
             </CardHeader>
-            <CardBody>
-                {props.books.map(book => {
-                    return <BookCard book={book} />
-                })}
+            <CardBody className="text-center">
+                {
+                    (props.searchResults.length > 0) ? 
+                        props.searchResults.map(book => {
+                        return <BookCard key={book.id} book={book} />
+                    }): <span>No results to display.</span>
+                }
             </CardBody>
         </Card>
     );

@@ -3,18 +3,17 @@ const API_KEY = "AIzaSyBxiBZEwQSlfF9cbWayfIEyi3WvqLOSzCo";
 
 module.exports = (app, db) => {
 
-    app.get("/search", (req, res) => {
-        let uri = "https://www.googleapis.com/books/v1/volumes?q=" +
-            req.body.term + "&key=" + API_KEY;
+    app.get("/api/search/:term", (req, res) => {
+        let uri = `https://www.googleapis.com/books/v1/volumes?q=${req.params.term}&key=${API_KEY}`;
 
         axios
             .get(uri)
-            .then(({ data: { results } }) => res.json(results))
-            .catch(err => res.status(422).json(err));
+            .then(results => {res.json(results.data);})
+            .catch(err => {res.status(422).json(err);});
     });
 
     // Returns all saved books in JSON format
-    app.get("api/books", (req, res) => {
+    app.get("/api/books", (req, res) => {
         db.Book.find({}).then(data => {
             res.json(data);
         }).catch(error => {
@@ -23,7 +22,7 @@ module.exports = (app, db) => {
     });
 
     // Saves a new book document
-    app.post("api/books", (req, res) => {
+    app.post("/api/books", (req, res) => {
         db.Book.insert({
             title: req.body.title,
             authors: req.body.authors,
@@ -38,7 +37,7 @@ module.exports = (app, db) => {
     });
 
     // Deletes a saved book, specified by ID
-    app.delete("api/books/:id", (req, res) => {
+    app.delete("/api/books/:id", (req, res) => {
         db.Book.deleteOne({
             _id: req.params.id
         }).then(() => {

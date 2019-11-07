@@ -9,11 +9,11 @@ import {
     NavLink,
     InputGroup,
     InputGroupAddon,
-    InputGroupText,
+    Button,
     FormInput
 } from "shards-react";
 
-function AppNav() {
+function AppNav(props) {
     return (
         <Navbar type="dark" theme="primary" expand="sm">
             <NavbarBrand href="/">
@@ -31,11 +31,17 @@ function AppNav() {
             <Nav navbar className="ml-auto w-50">
                 <InputGroup size="md" seamless>
                     <InputGroupAddon type="append">
-                        <InputGroupText>
+                        <Button theme="dark" onClick={props.onClick} className="rounded-right">
                             <FontAwesomeIcon icon={faSearch} />
-                        </InputGroupText>
+                        </Button>
                     </InputGroupAddon>
-                    <FormInput className="border-0 pl-2" placeholder="Search..." />
+                    <FormInput
+                        type="search"
+                        className="border-0 pl-3"
+                        placeholder="Search..."
+                        value={props.value}
+                        onChange={props.onChange}
+                    />
                 </InputGroup>
             </Nav>
         </Navbar>

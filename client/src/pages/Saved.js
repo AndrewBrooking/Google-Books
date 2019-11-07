@@ -1,7 +1,9 @@
 import React from "react";
 
 function Saved() {
-    return null;
+    return (
+        <div></div>
+    );
 }
 
 export default Saved;
